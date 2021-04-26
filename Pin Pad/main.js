@@ -1,5 +1,5 @@
 class PinLogin {
-  constructor({el, loginEndpoint, redirectTo, maxNumbers = Infinity})
+  constructor({el, loginEndpoint, redirectTo, maxNumbers = Infinity}){
   this.el = {
     main: el,
     numPad: el.querySelector('.pin-login__numpad'),
@@ -25,7 +25,7 @@ _generatePad(){
     keyEl.classList.toggle("material-icons", isNaN(key))
     keyEl.textContent = key
     keyEl.addEventListener('click',() =>{
-      this.handleKeyPress(key)
+      this._handleKeyPress(key)
     })
     this.el.numPad.appendChild(keyEl)
 
@@ -33,5 +33,46 @@ _generatePad(){
       this.el.numPad.appendChild(document.createElement('br'))
     }
   });
+  }
 
+  _handleKeyPress(key){
+    switch (key) {
+      case "backspace":
+        this.value = this.value.substring(0, this.value.length -1)
+          break;
+      case "done":
+        this._attemptLogin();
+        break;
+      default:
+        if (this.value.length < this.maxNumbers && !isNaN(key)) {
+          this.value += key
+        }
+        break;
+    }
+    this._updateValueText()
+  }
+
+  _updateValueText(){
+    this.el.textDisplay.value = "_".repeat(this.value.length)
+    this.el.textDisplay.classList.remove('pin-login__text--error')
+  }
+
+
+  _attemptLogin(){
+    if(this.value.length > 0){
+      fetch(this.loginEndpoint, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `pincode=${this.value}`,
+      }).then(response =>{
+        if (response.status === 200) {
+          window.location.href = this.redirectTo
+        }else {
+          this.el.textDisplay.classList.add('pin-login__text--error')
+        }
+      })
+    }
+  }
 }
