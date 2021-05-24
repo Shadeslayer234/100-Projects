@@ -10,7 +10,7 @@ html{
 
 body{
     height: 100vh;
-    background: darkcyan;
+    background: brown;
 }
 
 header nav{
@@ -39,6 +39,7 @@ ul li{
 
 section{
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     height: 90%;
@@ -55,4 +56,8 @@ section input[type=button]{
 
 section input[type=button]:hover{
     padding: 1.1rem;
+}
+
+section h2{
+    margin-top: 1.5rem;
 }
