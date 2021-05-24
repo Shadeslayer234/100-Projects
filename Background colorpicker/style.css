@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header nav{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin: auto;
+}
+nav h1{
+    padding: 1rem;
+}
+
+nav ul{
+    display: flex;
+}
+
+ul li,a{
+    list-style:none;
+    text-decoration: none;
+    color: #333;
+}
+
+ul li{
+    padding: 1rem;
+}
