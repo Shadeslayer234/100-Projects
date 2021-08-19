@@ -1,0 +1,14 @@
+.container{
+  display: grid;
+  grid-template-rows: 1fr 3fr;
+}
+
+.display{
+  background: gray;
+}
+
+.grid-container{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5,1fr)
+}
